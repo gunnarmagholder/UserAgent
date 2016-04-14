@@ -1,0 +1,26 @@
+{
+  "name": "angulartest",
+  "dependencies": {
+    "angular": "^1.4.0",
+    "angular-ui-router": "^0.2.17",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.4"
+  }
+  "devDependencies": {
+    "babel-core": "^6.2.1",
+    "babel-preset-es2015": "^6.1.28",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "vinyl-source-stream": "^1.1.10"
+  }
+  "version": "1.0.0",
+  "description": "Testproject for using angular and sorting tables",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gunnar Magholder",
+  "license": "ISC"
+}

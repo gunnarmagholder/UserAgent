@@ -1,0 +1,75 @@
+(function() {
+	var app = angular.module('test', []);
+	app.controller('TestController', ['$http', function ($http) {
+		var test = this;
+        test.data=['groupA','groupB','groupC'];
+		test.users = [];
+		$http.get("data.json").success(function(data){
+			test.users = data;
+		});
+        
+        test.members = [];
+		// $http.get("groupA.json").success(function(data){
+			// test.members= data;
+		// });
+        
+        var groupsMembers=[];
+        var userMembers=[];
+        
+        test.selectGroup=function(group){
+            $http.get(group+".json").success(function(data){
+			test.members= data;
+                groupsMembers=data;
+             });
+
+             $http.get("data.json").success(function(data){
+			 test.users = data;
+                userMembers=data;
+		     });
+             
+             var diff = userMembers.filter(function(item) {
+                  return !groupsMembers.some(function(test){
+                    return test.SAMAccountName === item.SAMAccountName;
+                });
+                });
+
+            console.log("primero");
+            for(var i=0; i<test.users.length;i++){
+                console.log(test.users[i].SAMAccountName);
+            }
+            
+            var userss=[];
+            //console.log(test.members[1].SAMAccountName);
+            var i=0;
+            var j=0;
+           // console.log("length: "+test.members.length);
+
+           for (i, maxLength = test.users.length; i<maxLength; i++) {
+                
+                var userA=test.users[i];
+                // console.log("user:"+userA.SAMAccountName);
+                for (j=0; j<test.members.length; j++) {
+                    // console.log("2° for, j="+j);
+                    if(userA.SAMAccountName === test.members[j].SAMAccountName) {
+                            console.log("find:"+userA.SAMAccountName);
+                        } else {
+                            userss.push(userA);
+                        }
+                }
+           }
+            console.log("userss");
+            for(var i=0; i<userss.length;i++){
+                console.log(userss[i].SAMAccountName);
+            }
+            $http.get("data.json").success(function(data){
+            test.users = userss;
+            });
+            console.log("ultimo");
+            for(var i=0; i<test.users.length;i++){
+                console.log(test.users[i].SAMAccountName);
+            }
+		   
+         };
+    }])
+         
+})();
